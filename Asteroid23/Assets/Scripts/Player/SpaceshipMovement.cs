@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class SpaceshipMovement : MonoBehaviour
 {
+
+    [SerializeField]
+    private CinemachineVirtualCamera mainVirtualCamera,tempVirtualCamera; 
+
+    [SerializeField]
+    private Transform startTransform;
+
     [SerializeField]private float speed = 10.0f;
     [SerializeField]private float rotationSpeed = 100.0f;
 
@@ -13,11 +21,21 @@ public class SpaceshipMovement : MonoBehaviour
 
     private Rigidbody2D playerRb;
 
-   
+    private bool inTransition;
+
+    //pivate Cinemachine
+
+
+    private void Start()
+    {
+        StartCoroutine(StartTransition());
+    }
+
 
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerRb.velocity = transform.right * speed;
     }
 
     private void Update()
@@ -28,6 +46,8 @@ public class SpaceshipMovement : MonoBehaviour
         MoveForward();
         RotateSpaceShip();
     }
+
+
 
     void MoveForward()
     {
@@ -43,7 +63,21 @@ public class SpaceshipMovement : MonoBehaviour
         transform.Rotate(0, 0, -moveVectorH * rotationSpeed * Time.deltaTime);
     }
 
-    
+    IEnumerator StartTransition()
+    {
+        yield return new WaitForSeconds(2f);
+        Vector3 dir = (startTransform.position - transform.position).normalized;
+
+        while ((startTransform.position - transform.position).sqrMagnitude>=.2f)
+        {
+            transform.Translate(dir * speed * Time.deltaTime);
+            yield return null;
+        }
+
+
+        mainVirtualCamera.gameObject.SetActive(true);
+        tempVirtualCamera.gameObject.SetActive(false);
+    }
 
 }//class
 

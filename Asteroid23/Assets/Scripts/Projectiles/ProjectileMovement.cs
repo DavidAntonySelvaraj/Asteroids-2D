@@ -8,6 +8,7 @@ public class ProjectileMovement : MonoBehaviour
 
     [SerializeField] private float speed = 3f;
 
+    [SerializeField]
     private float Damage = 10;
 
 
@@ -22,8 +23,9 @@ public class ProjectileMovement : MonoBehaviour
     {
         if (collision.CompareTag(TagManager.METEOR_TAG))
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             collision.GetComponent<MeteorHealth>().TakeDamage(Damage);
+            gameObject.SetActive(false);
         }
     }
 

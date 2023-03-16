@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MeteorMovement : MonoBehaviour
 {
 
@@ -28,10 +29,9 @@ public class MeteorMovement : MonoBehaviour
         speedX = Random.Range(minSpeed,maxSpeed);
         speedY = speedX;
 
-        if (Random.Range(0, 2) > 0)
-        {
+        
             speedX *= -1f;
-        }
+      
 
         if (Random.Range(0, 2) > 0)
         {
@@ -39,7 +39,7 @@ public class MeteorMovement : MonoBehaviour
         }
 
 
-        moveOnY = true;
+        moveOnX = true;
 
     }
 

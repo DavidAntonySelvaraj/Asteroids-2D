@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MeteorSpawner : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class MeteorSpawner : MonoBehaviour
     private GameObject meteors;
 
     [SerializeField]
-    private float minX, maxX;
+    private float minY, maxY;
 
     private float minSpawmInterval = 1f, maxSpawmInterval = 1f;
 
@@ -16,15 +18,27 @@ public class MeteorSpawner : MonoBehaviour
 
     private Vector3 randSpawnPos;
 
+    public Action onSpaceInput;
+
 
     private void Start()
     {
 
-        Invoke("SpawnMeteor",Random.Range(minSpawmInterval, maxSpawmInterval));
-        
+        onSpaceInput = () =>
+        {
+            Invoke("SpawnMeteor", 2f);
+            onSpaceInput = null;
+        };
     }
 
-    
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.Space)) 
+        {
+            onSpaceInput?.Invoke();
+        }
+    }
+
 
     void SpawnMeteor()
     {
@@ -35,7 +49,7 @@ public class MeteorSpawner : MonoBehaviour
 
         for (int i = 0; i < SpawnNum; i++)
         {
-            randSpawnPos = new Vector3(Random.Range(minX, maxX), transform.position.y, 0f);
+            randSpawnPos = new Vector3(transform.position.x, Random.Range(minY, maxY), 0f);
             Instantiate(meteors, randSpawnPos, Quaternion.identity);
             
 

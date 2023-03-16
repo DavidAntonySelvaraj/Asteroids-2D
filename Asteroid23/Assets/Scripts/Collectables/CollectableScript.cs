@@ -25,8 +25,6 @@ public class CollectableScript : MonoBehaviour
 
     public bool isDefence;
 
-    private SpriteRenderer sr;
-
 
     private void Update()
     {

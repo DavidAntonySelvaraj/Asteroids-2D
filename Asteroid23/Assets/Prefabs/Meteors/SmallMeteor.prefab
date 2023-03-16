@@ -186,4 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad23cb4b33921d64aa760c7d67ef6b64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 5
+  BigMeteor: 0
+  smallMeteor: []
+  spawnSmallMeteor: {fileID: 0}
+  pickUp:
+  - {fileID: 4446591552385745083, guid: 493fa7cf922a1214287f2176ae513275, type: 3}
+  - {fileID: 6418561559497546518, guid: 94a4cbb65337c5c43a67e990dcf09daa, type: 3}

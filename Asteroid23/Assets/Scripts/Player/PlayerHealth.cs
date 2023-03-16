@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField]
@@ -14,12 +15,20 @@ public class PlayerHealth : MonoBehaviour
 
     private bool isProtected;
 
+    [SerializeField]
+    private GameObject barrier;
+
 
     private void Awake()
     {
         playerHealth = playerMaxHealth;
+        //barrier.SetActive(false);
     }
 
+    private void Update()
+    {
+        barrier.SetActive(isProtected);
+    }
     public void TakeDamage(float damageAmount)
     {
         playerHealth-=damageAmount;

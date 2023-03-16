@@ -17,7 +17,10 @@ public class MeteorHealth : MonoBehaviour
     [SerializeField]
     private Transform spawnSmallMeteor;
 
+    [SerializeField]
+    private GameObject[] pickUp;
 
+    
     public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
@@ -28,11 +31,11 @@ public class MeteorHealth : MonoBehaviour
             //Destroy(gameObject);
             
             
-        }
+        }/*
         else
         {
 
-        }
+        }*/
 
     }
 
@@ -48,9 +51,31 @@ public class MeteorHealth : MonoBehaviour
         }
         else
         {
+            IfCollectableSpawn();
             Destroy(gameObject);
         }
 
+    }
+
+    void IfCollectableSpawn()
+    {
+        float r = Random.Range(0, 3);
+        if (r > 1)
+        {
+            if (Random.Range(0, 3) > 1)
+            {
+
+                Instantiate(pickUp[0], transform.position, Quaternion.identity);
+            }
+            else
+            {
+
+                Instantiate(pickUp[1], transform.position, Quaternion.identity);
+            }
+
+        }
+        else
+            return;
     }
 
    
