@@ -5,6 +5,8 @@ using Cinemachine;
 
 public class SpaceshipMovement : MonoBehaviour
 {
+    [SerializeField]
+    private SpaceShipMovementSO mShipMovementSO;
 
     [SerializeField]
     private CinemachineVirtualCamera mainVirtualCamera,tempVirtualCamera; 
@@ -35,7 +37,7 @@ public class SpaceshipMovement : MonoBehaviour
     private void Awake()
     {
         playerRb = GetComponent<Rigidbody2D>();
-        playerRb.velocity = transform.right * speed;
+        playerRb.velocity = transform.right * mShipMovementSO.speed;
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class SpaceshipMovement : MonoBehaviour
 
     void MoveForward()
     {
-        playerRb.velocity = transform.up * moveVectorV * speed;
+        playerRb.velocity = transform.up * moveVectorV * mShipMovementSO.speed;
         if (moveVectorV < 0)
         {
             playerRb.velocity = new Vector2 (0, 0);
@@ -60,7 +62,7 @@ public class SpaceshipMovement : MonoBehaviour
 
     void RotateSpaceShip()
     {
-        transform.Rotate(0, 0, -moveVectorH * rotationSpeed * Time.deltaTime);
+        transform.Rotate(0, 0, -moveVectorH * mShipMovementSO.rotationSpeed * Time.deltaTime);
     }
 
     IEnumerator StartTransition()
@@ -70,7 +72,7 @@ public class SpaceshipMovement : MonoBehaviour
 
         while ((startTransform.position - transform.position).sqrMagnitude>=.2f)
         {
-            transform.Translate(dir * speed * Time.deltaTime);
+            transform.Translate(dir * mShipMovementSO.speed * Time.deltaTime);
             yield return null;
         }
 
