@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MeteorMovement : MonoBehaviour
 {
-
+    
 
     [SerializeField] private float minSpeed = 4f, maxSpeed = 10f;
 
@@ -24,9 +24,9 @@ public class MeteorMovement : MonoBehaviour
 
     private void Awake()
     {
-        rotationalSpeed = Random.Range(minRotationalSpeed,maxRotationalSpeed);
+        rotationalSpeed = Random.Range(minRotationalSpeed, maxRotationalSpeed);
 
-        speedX = Random.Range(minSpeed,maxSpeed);
+        speedX = Random.Range(minSpeed, maxSpeed);
         speedY = speedX;
 
         

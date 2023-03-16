@@ -17,6 +17,9 @@ public class SpaceshipMovement : MonoBehaviour
     [SerializeField]private float speed = 10.0f;
     [SerializeField]private float rotationSpeed = 100.0f;
 
+    [SerializeField]
+    private float minX, maxX, minY, maxY;
+
     private float moveVectorH;
     private float moveVectorV;
 
@@ -47,6 +50,7 @@ public class SpaceshipMovement : MonoBehaviour
 
         MoveForward();
         RotateSpaceShip();
+        HoldMovement();
     }
 
 
@@ -79,6 +83,21 @@ public class SpaceshipMovement : MonoBehaviour
 
         mainVirtualCamera.gameObject.SetActive(true);
         tempVirtualCamera.gameObject.SetActive(false);
+    }
+
+    void HoldMovement()
+    {
+        if (transform.position.x < minX)
+            transform.position = new Vector3(minX, transform.position.y, 0f);
+
+        if (transform.position.x > maxX)
+            transform.position = new Vector3(maxX, transform.position.y, 0f);
+
+        if (transform.position.y < minY)
+            transform.position = new Vector3(transform.position.x, minY, 0f);
+
+        if (transform.position.y > maxY)
+            transform.position = new Vector3(transform.position.x, maxY, 0f);
     }
 
 }//class
